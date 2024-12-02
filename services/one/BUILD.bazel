@@ -1,0 +1,18 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_binary", "go_library")
+
+go_library(
+    name = "one_lib",
+    srcs = ["main.go"],
+    importpath = "github.com/bennettzhu1/bazel_go_demo/services/one",
+    visibility = ["//visibility:private"],
+    deps = [
+        "//libs/hello",
+        "@com_github_labstack_echo_v4//:go_default_library",
+    ],
+)
+
+go_binary(
+    name = "one",
+    embed = [":one_lib"],
+    visibility = ["//visibility:public"],
+)
